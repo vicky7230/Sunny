@@ -1,0 +1,334 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:scrollbars="none">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp">
+
+            <com.mikepenz.iconics.view.IconicsTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="{ion_android_time}"
+                android:layout_marginLeft="20dp"
+                android:textColor="@android:color/black"
+                android:textSize="20sp" />
+
+            <com.mikepenz.iconics.view.IconicsTextView
+                android:id="@+id/time_icon"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginLeft="10dp"
+                android:fontFamily="@font/roboto_medium"
+                android:gravity="start"
+                android:textColor="@android:color/black"
+                android:textSize="16sp" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/location"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="20dp"
+                android:layout_weight="1"
+                android:fontFamily="@font/roboto_medium"
+                android:gravity="right"
+                android:textColor="@android:color/black"
+                android:textSize="16sp" />
+        </LinearLayout>
+
+        <com.mikepenz.iconics.view.IconicsTextView
+            android:id="@+id/weather_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textColor="@android:color/black"
+            android:textSize="100sp" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/weather"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/roboto_medium"
+            android:gravity="center_horizontal"
+            android:textColor="@android:color/black"
+            android:textSize="16sp" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/temp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:textColor="@android:color/black"
+            android:textSize="35sp"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/temp_high"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto_medium"
+                android:textColor="@android:color/black"
+                android:textSize="20sp" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/temp_low"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto_medium"
+                android:textColor="@android:color/black"
+                android:textSize="20sp" />
+        </LinearLayout>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/wind"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/roboto_medium"
+            android:gravity="center_horizontal"
+            android:textColor="@android:color/black"
+            android:textSize="16sp" />
+
+        <LinearLayout
+            android:id="@+id/forecast_1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:layout_marginBottom="20dp"
+            android:orientation="horizontal">
+
+            <com.mikepenz.iconics.view.IconicsTextView
+                android:id="@+id/forecast_time_1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="1"
+                android:fontFamily="@font/roboto_medium"
+                android:gravity="end"
+                android:textColor="@android:color/black"
+                android:textSize="15sp" />
+
+            <com.mikepenz.iconics.view.IconicsTextView
+                android:id="@+id/forecast_icon_1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:textColor="@android:color/black"
+                android:textSize="50sp" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/forecast_weather_1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="1"
+                android:fontFamily="@font/roboto_medium"
+                android:textColor="@android:color/black"
+                android:textSize="15sp" />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:background="@android:color/black" />
+
+        <LinearLayout
+            android:id="@+id/forecast_2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            android:orientation="horizontal">
+
+            <com.mikepenz.iconics.view.IconicsTextView
+                android:id="@+id/forecast_time_2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="1"
+                android:fontFamily="@font/roboto_medium"
+                android:gravity="end"
+                android:textColor="@android:color/black"
+                android:textSize="15sp" />
+
+            <com.mikepenz.iconics.view.IconicsTextView
+                android:id="@+id/forecast_icon_2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:textColor="@android:color/black"
+                android:textSize="50sp" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/forecast_weather_2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="1"
+                android:fontFamily="@font/roboto_medium"
+                android:textColor="@android:color/black"
+                android:textSize="15sp" />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:background="@android:color/black" />
+
+        <LinearLayout
+            android:id="@+id/forecast_3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            android:orientation="horizontal">
+
+            <com.mikepenz.iconics.view.IconicsTextView
+                android:id="@+id/forecast_time_3"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="1"
+                android:fontFamily="@font/roboto_medium"
+                android:gravity="end"
+                android:textColor="@android:color/black"
+                android:textSize="15sp" />
+
+            <com.mikepenz.iconics.view.IconicsTextView
+                android:id="@+id/forecast_icon_3"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:textColor="@android:color/black"
+                android:textSize="50sp" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/forecast_weather_3"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="1"
+                android:fontFamily="@font/roboto_medium"
+                android:textColor="@android:color/black"
+                android:textSize="15sp" />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:background="@android:color/black" />
+
+        <LinearLayout
+            android:id="@+id/forecast_4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            android:orientation="horizontal">
+
+            <com.mikepenz.iconics.view.IconicsTextView
+                android:id="@+id/forecast_time_4"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="1"
+                android:fontFamily="@font/roboto_medium"
+                android:gravity="end"
+                android:textColor="@android:color/black"
+                android:textSize="15sp" />
+
+            <com.mikepenz.iconics.view.IconicsTextView
+                android:id="@+id/forecast_icon_4"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:textColor="@android:color/black"
+                android:textSize="50sp" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/forecast_weather_4"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="1"
+                android:fontFamily="@font/roboto_medium"
+                android:textColor="@android:color/black"
+                android:textSize="15sp" />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:background="@android:color/black" />
+
+        <LinearLayout
+            android:id="@+id/forecast_5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            android:orientation="horizontal"
+            android:textColor="@android:color/black">
+
+            <com.mikepenz.iconics.view.IconicsTextView
+                android:id="@+id/forecast_time_5"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="1"
+                android:fontFamily="@font/roboto_medium"
+                android:gravity="end"
+                android:textColor="@android:color/black"
+                android:textSize="15sp" />
+
+            <com.mikepenz.iconics.view.IconicsTextView
+                android:id="@+id/forecast_icon_5"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:textColor="@android:color/black"
+                android:textSize="50sp" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/forecast_weather_5"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="1"
+                android:fontFamily="@font/roboto_medium"
+                android:textColor="@android:color/black"
+                android:textSize="15sp" />
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView>

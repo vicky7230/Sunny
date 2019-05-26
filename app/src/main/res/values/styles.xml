@@ -1,0 +1,19 @@
+<resources>
+
+    <style name="AppThemeDay" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="AppThemeNight" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <item name="colorPrimary">@color/colorPrimaryNight</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDarkNight</item>
+        <item name="colorAccent">@color/colorAccentNight</item>
+    </style>
+
+    <style name="ProgressBarTheme" parent="AppThemeDay">
+        <item name="colorAccent">@android:color/white</item>
+    </style>
+
+</resources>
