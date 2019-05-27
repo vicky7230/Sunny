@@ -14,12 +14,10 @@ import android.os.Bundle
 import android.util.DisplayMetrics
 import android.view.Menu
 import android.view.MenuItem
-import android.view.View
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
-import androidx.viewpager.widget.ViewPager
 import com.google.android.gms.common.api.ResolvableApiException
 import com.google.android.gms.location.*
 import com.google.android.gms.tasks.OnFailureListener
@@ -30,7 +28,6 @@ import com.vicky7230.sunny.R
 import com.vicky7230.sunny.ui.about.AboutActivity
 import com.vicky7230.sunny.ui.add_city.AddCityActivity
 import com.vicky7230.sunny.ui.base.BaseActivity
-import com.vicky7230.sunny.ui.base.BaseFragment
 import com.vicky7230.sunny.ui.saved_cities.SavedCitiesActivity
 import com.vicky7230.sunny.ui.weather.city.CityWeatherFragment
 import com.vicky7230.sunny.ui.weather.currentLocation.CurrentLocationWeatherFragment
@@ -42,7 +39,6 @@ import dagger.android.support.HasSupportFragmentInjector
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.functions.Consumer
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_main.*
 import org.greenrobot.eventbus.EventBus
