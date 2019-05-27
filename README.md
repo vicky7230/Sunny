@@ -17,6 +17,10 @@
 </p>
 <br>
 
+# Get it on google play
+
+[<img src="https://play.google.com/intl/en_us/badges/images/generic/en-play-badge.png" width="200">](https://play.google.com/store/apps/details?id=com.vicky7230.sunny)
+
 <p align="center">
   <img src="https://github.com/vicky7230/Sunny/blob/master/graphics/widget.png" width="250">
 </p>
