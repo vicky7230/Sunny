@@ -17,6 +17,7 @@ import com.vicky7230.sunny.BuildConfig
 import com.vicky7230.sunny.R
 import com.vicky7230.sunny.data.Config
 import com.vicky7230.sunny.data.network.ApiService
+import com.vicky7230.sunny.data.network.model.weather.CurrentWeather
 import com.vicky7230.sunny.data.prefs.AppPreferencesHelper
 import com.vicky7230.sunny.ui.add_city.CityListAdapter
 import com.vicky7230.sunny.utils.AppConstants.CITY
@@ -53,7 +54,6 @@ class WidgetConfigureActivity : AppCompatActivity(), CityListAdapter.Callback {
         setResult(RESULT_CANCELED)
         setContentView(R.layout.activity_widget_configure)
 
-        // These steps are seen in the previous examples
         widgetManager = AppWidgetManager.getInstance(this)
         views = RemoteViews(this.packageName, R.layout.weather_widget)
 
@@ -139,78 +139,9 @@ class WidgetConfigureActivity : AppCompatActivity(), CityListAdapter.Callback {
 
                     hideLoading()
 
-                    views?.setTextViewText(
-                        R.id.temp,
-                        "${currentWeather.main?.temp.toString()}°C"
-                    )
-                    views?.setTextViewText(
-                        R.id.weather,
-                        currentWeather.weather?.get(0)?.description
-                    )
-                    views?.setTextViewText(
-                        R.id.location,
-                        "${currentWeather.name}, ${currentWeather.sys?.country}"
-                    )
-                    views?.setTextViewText(R.id.date,
-                        currentWeather.dt?.let {
-                            CommonUtils.getTimeForWidget(
-                                it
-                            )
-                        }
-                    )
-
-                    if (currentWeather.weather?.get(0)?.icon.equals("01d"))
-                        views?.setImageViewResource(R.id.icon, R.drawable.met_sun)
-                    else if (currentWeather.weather?.get(0)?.icon.equals("01n"))
-                        views?.setImageViewResource(R.id.icon, R.drawable.met_moon_inv)
-                    else if (currentWeather.weather?.get(0)?.icon.equals("02d"))
-                        views?.setImageViewResource(R.id.icon, R.drawable.met_cloud_sun)
-                    else if (currentWeather.weather?.get(0)?.icon.equals("02n"))
-                        views?.setImageViewResource(R.id.icon, R.drawable.met_cloud_moon_inv)
-                    else if (currentWeather.weather?.get(0)?.icon.equals("03d"))
-                        views?.setImageViewResource(R.id.icon, R.drawable.met_cloud)
-                    else if (currentWeather.weather?.get(0)?.icon.equals("03n"))
-                        views?.setImageViewResource(R.id.icon, R.drawable.met_cloud_inv)
-                    else if (currentWeather.weather?.get(0)?.icon.equals("04d"))
-                        views?.setImageViewResource(R.id.icon, R.drawable.met_clouds)
-                    else if (currentWeather.weather?.get(0)?.icon.equals("04n"))
-                        views?.setImageViewResource(R.id.icon, R.drawable.met_clouds_inv)
-                    else if (currentWeather.weather?.get(0)?.icon.equals("09d"))
-                        views?.setImageViewResource(R.id.icon, R.drawable.met_rain)
-                    else if (currentWeather.weather?.get(0)?.icon.equals("09n"))
-                        views?.setImageViewResource(R.id.icon, R.drawable.met_rain_inv)
-                    else if (currentWeather.weather?.get(0)?.icon.equals("10d"))
-                        views?.setImageViewResource(R.id.icon, R.drawable.met_windy_rain)
-                    else if (currentWeather.weather?.get(0)?.icon.equals("10n"))
-                        views?.setImageViewResource(R.id.icon, R.drawable.met_windy_rain_inv)
-                    else if (currentWeather.weather?.get(0)?.icon.equals("11d"))
-                        views?.setImageViewResource(R.id.icon, R.drawable.met_clouds_flash)
-                    else if (currentWeather.weather?.get(0)?.icon.equals("11n"))
-                        views?.setImageViewResource(R.id.icon, R.drawable.met_clouds_flash_inv)
-                    else if (currentWeather.weather?.get(0)?.icon.equals("13d"))
-                        views?.setImageViewResource(R.id.icon, R.drawable.met_snow)
-                    else if (currentWeather.weather?.get(0)?.icon.equals("13n"))
-                        views?.setImageViewResource(R.id.icon, R.drawable.met_snow_inv)
-                    else if (currentWeather.weather?.get(0)?.icon.equals("50d") ||
-                        currentWeather.weather?.get(0)?.icon.equals("50n")
-                    )
-                        views?.setImageViewResource(R.id.icon, R.drawable.met_fog)
-
-                    val intent = Intent(this@WidgetConfigureActivity, WeatherWidget::class.java)
-                    intent.action = WeatherWidget.ACTION_WEATHER_WIDGET
-                    intent.putExtra(CITY, city)
-                    val pendingIntent = PendingIntent.getBroadcast(
-                        this@WidgetConfigureActivity, 0, intent,
-                        PendingIntent.FLAG_UPDATE_CURRENT
-                    )
-
-                    views?.setOnClickPendingIntent(R.id.refresh_button, pendingIntent)
-
-                    widgetManager = AppWidgetManager.getInstance(this@WidgetConfigureActivity)
-                    widgetManager?.updateAppWidget(mAppWidgetId, views)
+                    updateWidgetUI(currentWeather, city)
 
                     val resultValue = Intent()
-                    // Set the results as expected from a 'configure activity'.
                     resultValue.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, mAppWidgetId)
                     setResult(Activity.RESULT_OK, resultValue)
                     finish()
@@ -225,6 +156,80 @@ class WidgetConfigureActivity : AppCompatActivity(), CityListAdapter.Callback {
                     ).show()
                 })
         )
+    }
+
+    private fun updateWidgetUI(currentWeather: CurrentWeather, city: String) {
+
+        views?.setTextViewText(
+            R.id.temp,
+            "${currentWeather.main?.temp.toString()}°C"
+        )
+        views?.setTextViewText(
+            R.id.weather,
+            currentWeather.weather?.get(0)?.description
+        )
+        views?.setTextViewText(
+            R.id.location,
+            "${currentWeather.name}, ${currentWeather.sys?.country}"
+        )
+        views?.setTextViewText(R.id.date,
+            currentWeather.dt?.let {
+                CommonUtils.getTimeForWidget(
+                    it
+                )
+            }
+        )
+
+        if (currentWeather.weather?.get(0)?.icon.equals("01d"))
+            views?.setImageViewResource(R.id.icon, R.drawable.met_sun)
+        else if (currentWeather.weather?.get(0)?.icon.equals("01n"))
+            views?.setImageViewResource(R.id.icon, R.drawable.met_moon_inv)
+        else if (currentWeather.weather?.get(0)?.icon.equals("02d"))
+            views?.setImageViewResource(R.id.icon, R.drawable.met_cloud_sun)
+        else if (currentWeather.weather?.get(0)?.icon.equals("02n"))
+            views?.setImageViewResource(R.id.icon, R.drawable.met_cloud_moon_inv)
+        else if (currentWeather.weather?.get(0)?.icon.equals("03d"))
+            views?.setImageViewResource(R.id.icon, R.drawable.met_cloud)
+        else if (currentWeather.weather?.get(0)?.icon.equals("03n"))
+            views?.setImageViewResource(R.id.icon, R.drawable.met_cloud_inv)
+        else if (currentWeather.weather?.get(0)?.icon.equals("04d"))
+            views?.setImageViewResource(R.id.icon, R.drawable.met_clouds)
+        else if (currentWeather.weather?.get(0)?.icon.equals("04n"))
+            views?.setImageViewResource(R.id.icon, R.drawable.met_clouds_inv)
+        else if (currentWeather.weather?.get(0)?.icon.equals("09d"))
+            views?.setImageViewResource(R.id.icon, R.drawable.met_rain)
+        else if (currentWeather.weather?.get(0)?.icon.equals("09n"))
+            views?.setImageViewResource(R.id.icon, R.drawable.met_rain_inv)
+        else if (currentWeather.weather?.get(0)?.icon.equals("10d"))
+            views?.setImageViewResource(R.id.icon, R.drawable.met_windy_rain)
+        else if (currentWeather.weather?.get(0)?.icon.equals("10n"))
+            views?.setImageViewResource(R.id.icon, R.drawable.met_windy_rain_inv)
+        else if (currentWeather.weather?.get(0)?.icon.equals("11d"))
+            views?.setImageViewResource(R.id.icon, R.drawable.met_clouds_flash)
+        else if (currentWeather.weather?.get(0)?.icon.equals("11n"))
+            views?.setImageViewResource(R.id.icon, R.drawable.met_clouds_flash_inv)
+        else if (currentWeather.weather?.get(0)?.icon.equals("13d"))
+            views?.setImageViewResource(R.id.icon, R.drawable.met_snow)
+        else if (currentWeather.weather?.get(0)?.icon.equals("13n"))
+            views?.setImageViewResource(R.id.icon, R.drawable.met_snow_inv)
+        else if (currentWeather.weather?.get(0)?.icon.equals("50d") ||
+            currentWeather.weather?.get(0)?.icon.equals("50n")
+        )
+            views?.setImageViewResource(R.id.icon, R.drawable.met_fog)
+
+        val intent = Intent(this@WidgetConfigureActivity, WeatherWidget::class.java)
+        intent.action = WeatherWidget.ACTION_WEATHER_WIDGET
+        intent.putExtra(CITY, city)
+        val pendingIntent = PendingIntent.getBroadcast(
+            this@WidgetConfigureActivity, 0, intent,
+            PendingIntent.FLAG_UPDATE_CURRENT
+        )
+
+        views?.setOnClickPendingIntent(R.id.refresh_button, pendingIntent)
+
+        widgetManager = AppWidgetManager.getInstance(this@WidgetConfigureActivity)
+        widgetManager?.updateAppWidget(mAppWidgetId, views)
+
     }
 
     private fun showLoading() {
