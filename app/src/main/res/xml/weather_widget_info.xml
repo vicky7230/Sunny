@@ -7,7 +7,7 @@
     android:minHeight="120dp"
     android:previewImage="@drawable/met_clouds_flash"
     android:resizeMode="horizontal|vertical"
-    android:updatePeriodMillis="900000"
+    android:updatePeriodMillis="1800000"
     android:widgetCategory="home_screen">
 
 </appwidget-provider>
