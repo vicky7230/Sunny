@@ -48,6 +48,8 @@ class WeatherWidget : AppWidgetProvider() {
 
     companion object {
 
+        var views: RemoteViews? = null
+
         val ACTION_WEATHER_WIDGET = "ACTION_WEATHER_WIDGET"
 
         private fun getHttpLoggingInterceptor(): HttpLoggingInterceptor {
@@ -81,10 +83,12 @@ class WeatherWidget : AppWidgetProvider() {
             appWidgetId: Int
         ) {
 
-            val views = RemoteViews(
-                context.packageName,
-                R.layout.weather_widget
-            )
+            if (views == null) {
+                views = RemoteViews(
+                    context.packageName,
+                    R.layout.weather_widget
+                )
+            }
 
             val appPreferencesHelper = AppPreferencesHelper(context)
             val intent = Intent(context, WeatherWidget::class.java)
@@ -94,7 +98,7 @@ class WeatherWidget : AppWidgetProvider() {
                 context, 0, intent,
                 PendingIntent.FLAG_UPDATE_CURRENT
             )
-            views.setOnClickPendingIntent(R.id.refresh_button, pendingIntent)
+            views?.setOnClickPendingIntent(R.id.refresh_button, pendingIntent)
             appWidgetManager.updateAppWidget(appWidgetId, views)
 
             if (appPreferencesHelper.getCity() != null && appPreferencesHelper.getCity() != "") {
@@ -103,7 +107,18 @@ class WeatherWidget : AppWidgetProvider() {
         }
 
         @SuppressLint("CheckResult")
-        private fun getWeatherData(city: String, context: Context?) {
+        private fun getWeatherData(
+            city: String,
+            context: Context?
+        ) {
+
+            if (views == null) {
+                views = RemoteViews(
+                    context?.packageName,
+                    R.layout.weather_widget
+                )
+            }
+
             val retrofit = Retrofit.Builder()
                 .baseUrl(Config.BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
@@ -114,17 +129,13 @@ class WeatherWidget : AppWidgetProvider() {
             val apiService = retrofit.create(ApiService::class.java)
             val appWidget = ComponentName(context, WeatherWidget::class.java)
             val appWidgetManager = AppWidgetManager.getInstance(context)
-            val views = RemoteViews(
-                context?.packageName,
-                R.layout.weather_widget
-            )
 
-            views.setViewVisibility(R.id.temp, INVISIBLE)
-            views.setViewVisibility(R.id.weather, INVISIBLE)
-            views.setViewVisibility(R.id.location, INVISIBLE)
-            views.setViewVisibility(R.id.date, INVISIBLE)
-            views.setViewVisibility(R.id.icon, INVISIBLE)
-            views.setViewVisibility(R.id.progress, VISIBLE)
+            views?.setViewVisibility(R.id.temp, INVISIBLE)
+            views?.setViewVisibility(R.id.weather, INVISIBLE)
+            views?.setViewVisibility(R.id.location, INVISIBLE)
+            views?.setViewVisibility(R.id.date, INVISIBLE)
+            views?.setViewVisibility(R.id.icon, INVISIBLE)
+            views?.setViewVisibility(R.id.progress, VISIBLE)
             appWidgetManager.updateAppWidget(appWidget, views)
 
             apiService.getCityWeather(
@@ -136,24 +147,28 @@ class WeatherWidget : AppWidgetProvider() {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({ currentWeather ->
 
-                    views.setViewVisibility(R.id.temp, VISIBLE)
-                    views.setViewVisibility(R.id.weather, VISIBLE)
-                    views.setViewVisibility(R.id.location, VISIBLE)
-                    views.setViewVisibility(R.id.date, VISIBLE)
-                    views.setViewVisibility(R.id.icon, VISIBLE)
-                    views.setViewVisibility(R.id.progress, GONE)
+                    views?.setViewVisibility(R.id.temp, VISIBLE)
+                    views?.setViewVisibility(R.id.weather, VISIBLE)
+                    views?.setViewVisibility(R.id.location, VISIBLE)
+                    views?.setViewVisibility(R.id.date, VISIBLE)
+                    views?.setViewVisibility(R.id.icon, VISIBLE)
+                    views?.setViewVisibility(R.id.progress, GONE)
                     appWidgetManager.updateAppWidget(appWidget, views)
 
                     updateWidgetUI(currentWeather, views, appWidget, appWidgetManager)
 
+                    /*val sdf = SimpleDateFormat("dd/MM/yyyy HH:mm:ss", Locale.ENGLISH)
+                    val currentDateAndTime = sdf.format(Date())
+                    Crashlytics.logException(Throwable("WIDGET_UPDATE : Called at : $currentDateAndTime"))*/
+
                 }, {
 
-                    views.setViewVisibility(R.id.temp, INVISIBLE)
-                    views.setViewVisibility(R.id.weather, INVISIBLE)
-                    views.setViewVisibility(R.id.location, INVISIBLE)
-                    views.setViewVisibility(R.id.date, INVISIBLE)
-                    views.setViewVisibility(R.id.icon, INVISIBLE)
-                    views.setViewVisibility(R.id.progress, GONE)
+                    views?.setViewVisibility(R.id.temp, INVISIBLE)
+                    views?.setViewVisibility(R.id.weather, INVISIBLE)
+                    views?.setViewVisibility(R.id.location, INVISIBLE)
+                    views?.setViewVisibility(R.id.date, INVISIBLE)
+                    views?.setViewVisibility(R.id.icon, INVISIBLE)
+                    views?.setViewVisibility(R.id.progress, GONE)
                     appWidgetManager.updateAppWidget(appWidget, views)
 
                     Timber.e(it)
@@ -167,24 +182,24 @@ class WeatherWidget : AppWidgetProvider() {
 
         private fun updateWidgetUI(
             currentWeather: CurrentWeather,
-            views: RemoteViews,
+            views: RemoteViews?,
             appWidget: ComponentName,
             appWidgetManager: AppWidgetManager
         ) {
 
-            views.setTextViewText(
+            views?.setTextViewText(
                 R.id.temp,
                 "${currentWeather.main?.temp.toString()}°C"
             )
-            views.setTextViewText(
+            views?.setTextViewText(
                 R.id.weather,
                 currentWeather.weather?.get(0)?.description
             )
-            views.setTextViewText(
+            views?.setTextViewText(
                 R.id.location,
                 "${currentWeather.name}, ${currentWeather.sys?.country}"
             )
-            views.setTextViewText(R.id.date,
+            views?.setTextViewText(R.id.date,
                 currentWeather.dt?.let {
                     CommonUtils.getTimeForWidget(
                         it
@@ -193,41 +208,41 @@ class WeatherWidget : AppWidgetProvider() {
             )
 
             if (currentWeather.weather?.get(0)?.icon.equals("01d"))
-                views.setImageViewResource(R.id.icon, R.drawable.met_sun)
+                views?.setImageViewResource(R.id.icon, R.drawable.met_sun)
             else if (currentWeather.weather?.get(0)?.icon.equals("01n"))
-                views.setImageViewResource(R.id.icon, R.drawable.met_moon_inv)
+                views?.setImageViewResource(R.id.icon, R.drawable.met_moon_inv)
             else if (currentWeather.weather?.get(0)?.icon.equals("02d"))
-                views.setImageViewResource(R.id.icon, R.drawable.met_cloud_sun)
+                views?.setImageViewResource(R.id.icon, R.drawable.met_cloud_sun)
             else if (currentWeather.weather?.get(0)?.icon.equals("02n"))
-                views.setImageViewResource(R.id.icon, R.drawable.met_cloud_moon_inv)
+                views?.setImageViewResource(R.id.icon, R.drawable.met_cloud_moon_inv)
             else if (currentWeather.weather?.get(0)?.icon.equals("03d"))
-                views.setImageViewResource(R.id.icon, R.drawable.met_cloud)
+                views?.setImageViewResource(R.id.icon, R.drawable.met_cloud)
             else if (currentWeather.weather?.get(0)?.icon.equals("03n"))
-                views.setImageViewResource(R.id.icon, R.drawable.met_cloud_inv)
+                views?.setImageViewResource(R.id.icon, R.drawable.met_cloud_inv)
             else if (currentWeather.weather?.get(0)?.icon.equals("04d"))
-                views.setImageViewResource(R.id.icon, R.drawable.met_clouds)
+                views?.setImageViewResource(R.id.icon, R.drawable.met_clouds)
             else if (currentWeather.weather?.get(0)?.icon.equals("04n"))
-                views.setImageViewResource(R.id.icon, R.drawable.met_clouds_inv)
+                views?.setImageViewResource(R.id.icon, R.drawable.met_clouds_inv)
             else if (currentWeather.weather?.get(0)?.icon.equals("09d"))
-                views.setImageViewResource(R.id.icon, R.drawable.met_rain)
+                views?.setImageViewResource(R.id.icon, R.drawable.met_rain)
             else if (currentWeather.weather?.get(0)?.icon.equals("09n"))
-                views.setImageViewResource(R.id.icon, R.drawable.met_rain_inv)
+                views?.setImageViewResource(R.id.icon, R.drawable.met_rain_inv)
             else if (currentWeather.weather?.get(0)?.icon.equals("10d"))
-                views.setImageViewResource(R.id.icon, R.drawable.met_windy_rain)
+                views?.setImageViewResource(R.id.icon, R.drawable.met_windy_rain)
             else if (currentWeather.weather?.get(0)?.icon.equals("10n"))
-                views.setImageViewResource(R.id.icon, R.drawable.met_windy_rain_inv)
+                views?.setImageViewResource(R.id.icon, R.drawable.met_windy_rain_inv)
             else if (currentWeather.weather?.get(0)?.icon.equals("11d"))
-                views.setImageViewResource(R.id.icon, R.drawable.met_clouds_flash)
+                views?.setImageViewResource(R.id.icon, R.drawable.met_clouds_flash)
             else if (currentWeather.weather?.get(0)?.icon.equals("11n"))
-                views.setImageViewResource(R.id.icon, R.drawable.met_clouds_flash_inv)
+                views?.setImageViewResource(R.id.icon, R.drawable.met_clouds_flash_inv)
             else if (currentWeather.weather?.get(0)?.icon.equals("13d"))
-                views.setImageViewResource(R.id.icon, R.drawable.met_snow)
+                views?.setImageViewResource(R.id.icon, R.drawable.met_snow)
             else if (currentWeather.weather?.get(0)?.icon.equals("13n"))
-                views.setImageViewResource(R.id.icon, R.drawable.met_snow_inv)
+                views?.setImageViewResource(R.id.icon, R.drawable.met_snow_inv)
             else if (currentWeather.weather?.get(0)?.icon.equals("50d") ||
                 currentWeather.weather?.get(0)?.icon.equals("50n")
             )
-                views.setImageViewResource(R.id.icon, R.drawable.met_fog)
+                views?.setImageViewResource(R.id.icon, R.drawable.met_fog)
 
             appWidgetManager.updateAppWidget(appWidget, views)
         }
@@ -240,10 +255,6 @@ class WeatherWidget : AppWidgetProvider() {
                 getWeatherData(intent.getStringExtra(CITY), context)
             }
         }
-    }
-
-    override fun onDisabled(context: Context?) {
-        super.onDisabled(context)
     }
 }
 
