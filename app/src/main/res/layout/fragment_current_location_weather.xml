@@ -16,8 +16,8 @@
             <com.mikepenz.iconics.view.IconicsTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="{ion_android_time}"
                 android:layout_marginLeft="20dp"
+                android:text="{ion_android_time}"
                 android:textColor="@android:color/black"
                 android:textSize="20sp" />
 
@@ -25,8 +25,8 @@
                 android:id="@+id/time_icon"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:layout_marginLeft="10dp"
+                android:layout_weight="1"
                 android:fontFamily="@font/roboto_medium"
                 android:gravity="start"
                 android:textColor="@android:color/black"
@@ -330,5 +330,12 @@
                 android:textColor="@android:color/black"
                 android:textSize="15sp" />
         </LinearLayout>
+
+        <com.google.android.gms.ads.AdView xmlns:ads="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/adView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            ads:adSize="SMART_BANNER"
+            ads:adUnitId="ca-app-pub-1032374578265411/6879698658" />
     </LinearLayout>
 </ScrollView>
