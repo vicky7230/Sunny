@@ -336,6 +336,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             ads:adSize="SMART_BANNER"
-            ads:adUnitId="ca-app-pub-1032374578265411/6879698658" />
+            ads:adUnitId="ca-app-pub-8078916938573428/4536271220" />
     </LinearLayout>
 </ScrollView>

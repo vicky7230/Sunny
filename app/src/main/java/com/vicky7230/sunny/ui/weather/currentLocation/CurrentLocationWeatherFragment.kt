@@ -11,6 +11,8 @@ import androidx.appcompat.widget.AppCompatTextView
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.MobileAds
+import com.google.android.gms.ads.RequestConfiguration
 import com.mikepenz.iconics.view.IconicsTextView
 import com.vicky7230.sunny.BuildConfig
 import com.vicky7230.sunny.R
@@ -72,11 +74,7 @@ class CurrentLocationWeatherFragment : BaseFragment() {
     }
 
     override fun setUp(view: View) {
-        val adRequest = if (BuildConfig.DEBUG)
-            AdRequest.Builder().addTestDevice("5DF72948CDD4E6C5F027EB25632285F4").build()
-        else
-            AdRequest.Builder().build()
-
+        val adRequest = AdRequest.Builder().build()
         adView.loadAd(adRequest)
     }
 

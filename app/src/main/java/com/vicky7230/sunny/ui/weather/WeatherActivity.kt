@@ -56,10 +56,13 @@ class WeatherActivity : BaseActivity(), OnSuccessListener<LocationSettingsRespon
 
     @Inject
     lateinit var fragmentDispatchingAndroidInjector: DispatchingAndroidInjector<Fragment>
+
     @Inject
     lateinit var viewPagerAdapter: ViewPagerAdapter
+
     @Inject
     lateinit var compositeDisposable: CompositeDisposable
+
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
 
@@ -74,7 +77,7 @@ class WeatherActivity : BaseActivity(), OnSuccessListener<LocationSettingsRespon
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        weatherViewModel = ViewModelProviders.of(
+        weatherViewModel = ViewModelProvider(
             this@WeatherActivity,
             viewModelFactory
         )[WeatherViewModel::class.java]

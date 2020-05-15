@@ -62,7 +62,8 @@
                 android:clickable="true"
                 app:backgroundTint="#73BAC7"
                 app:fabSize="normal"
-                app:srcCompat="@drawable/ic_add_black_24dp" />
+                app:srcCompat="@drawable/ic_add_black_24dp"
+                app:tint="@android:color/white" />
 
         </FrameLayout>
 

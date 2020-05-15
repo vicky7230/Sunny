@@ -1,77 +1,40 @@
 {
   "project_info": {
-    "project_number": "941725861792",
-    "firebase_url": "https://flux-198916.firebaseio.com",
-    "project_id": "flux-198916",
-    "storage_bucket": "flux-198916.appspot.com"
+    "project_number": "551186157022",
+    "firebase_url": "https://sunny-2c2e2.firebaseio.com",
+    "project_id": "sunny-2c2e2",
+    "storage_bucket": "sunny-2c2e2.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:941725861792:android:98164d74d0dfe651",
-        "android_client_info": {
-          "package_name": "com.vicky7230.flux"
-        }
-      },
-      "oauth_client": [
-        {
-          "client_id": "941725861792-hta9unfa0u95qqtp9nsui34n9h999a5l.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.vicky7230.flux",
-            "certificate_hash": "3f1beff297f34f4b1697ddfdaa566398f9da60f0"
-          }
-        },
-        {
-          "client_id": "941725861792-p4rtaplev9ia11dv8nuklteb5929bbv2.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyBO6UZTmPhXwCOxjoKJlyYDL2w_CkiECZM"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "941725861792-p4rtaplev9ia11dv8nuklteb5929bbv2.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:941725861792:android:175d04a27c3c4862",
+        "mobilesdk_app_id": "1:551186157022:android:c5f94468b89f95691a614f",
         "android_client_info": {
           "package_name": "com.vicky7230.sunny"
         }
       },
       "oauth_client": [
         {
-          "client_id": "941725861792-p4rtaplev9ia11dv8nuklteb5929bbv2.apps.googleusercontent.com",
+          "client_id": "551186157022-0fae202efbhkcesnlhg2nv602h4pgqil.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBO6UZTmPhXwCOxjoKJlyYDL2w_CkiECZM"
+          "current_key": "AIzaSyBbC5Pl3tEgeLQeCmgDtAddk9kVHAlvnW8"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "941725861792-p4rtaplev9ia11dv8nuklteb5929bbv2.apps.googleusercontent.com",
+              "client_id": "551186157022-0fae202efbhkcesnlhg2nv602h4pgqil.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
         }
       },
-      "admob_app_id": "ca-app-pub-1032374578265411~1972531498"
+      "admob_app_id": "ca-app-pub-8078916938573428~1495174919"
     }
   ],
   "configuration_version": "1"

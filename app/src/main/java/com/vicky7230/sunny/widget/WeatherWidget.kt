@@ -127,7 +127,7 @@ class WeatherWidget : AppWidgetProvider() {
                 .build()
 
             val apiService = retrofit.create(ApiService::class.java)
-            val appWidget = ComponentName(context, WeatherWidget::class.java)
+            val appWidget = context?.let { ComponentName(it, WeatherWidget::class.java) }
             val appWidgetManager = AppWidgetManager.getInstance(context)
 
             views?.setViewVisibility(R.id.temp, INVISIBLE)
@@ -155,7 +155,7 @@ class WeatherWidget : AppWidgetProvider() {
                     views?.setViewVisibility(R.id.progress, GONE)
                     appWidgetManager.updateAppWidget(appWidget, views)
 
-                    updateWidgetUI(currentWeather, views, appWidget, appWidgetManager)
+                    appWidget?.let { updateWidgetUI(currentWeather, views, it, appWidgetManager) }
 
                     /*val sdf = SimpleDateFormat("dd/MM/yyyy HH:mm:ss", Locale.ENGLISH)
                     val currentDateAndTime = sdf.format(Date())
