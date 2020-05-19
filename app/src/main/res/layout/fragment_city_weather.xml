@@ -103,6 +103,14 @@
             android:textColor="@android:color/black"
             android:textSize="16sp" />
 
+        <com.google.android.gms.ads.AdView xmlns:ads="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/adView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            ads:adSize="SMART_BANNER"
+            ads:adUnitId="ca-app-pub-8078916938573428/4536271220" />
+
         <LinearLayout
             android:id="@+id/forecast_1"
             android:layout_width="match_parent"
@@ -296,7 +304,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:layout_marginBottom="20dp"
             android:orientation="horizontal"
             android:textColor="@android:color/black">
 
@@ -330,12 +337,5 @@
                 android:textColor="@android:color/black"
                 android:textSize="15sp" />
         </LinearLayout>
-
-        <com.google.android.gms.ads.AdView xmlns:ads="http://schemas.android.com/apk/res-auto"
-            android:id="@+id/adView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            ads:adSize="SMART_BANNER"
-            ads:adUnitId="ca-app-pub-8078916938573428/4536271220" />
     </LinearLayout>
 </ScrollView>
